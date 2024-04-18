@@ -39,21 +39,18 @@ bool binSearch(vector<int> a, int key)
     return false;
 }
 
-vector<int> selSort(vector<int> a)
+vector<int> insSort(vector<int> a)
 {
     int len = a.size();
-    for (int i = 0; i <= len - 2; i++)
+    for (int i = 1; i <= len - 1; i++)
     {
-        int mini = a[i], pos = i;
-        for (int j = i + 1; j <= len - 1; j++)
+        int key = a[i], j = i - 1;
+        while (j >= 0 && a[j] > key)
         {
-            if (mini > a[j])
-            {
-                mini = a[j];
-                pos = j;
-            }
+            a[j + 1] = a[j];
+            j--;
         }
-        swap(a[pos], a[i]);
+        a[j + 1] = key;
     }
     return a;
 }
@@ -75,7 +72,7 @@ int main()
     }
     cout << "List of elements:" << endl;
     printVect(elems);
-    elems = selSort(elems);
+    elems = insSort(elems);
     cout << "Sorted list:" << endl;
     printVect(elems);
     cout << endl;
